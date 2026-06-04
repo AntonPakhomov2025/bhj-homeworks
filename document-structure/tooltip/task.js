@@ -4,9 +4,14 @@ toolTip.forEach((element) => {
   element.addEventListener("click", (event) => {
     event.preventDefault();
     const position = element.getBoundingClientRect();
-    element.insertAdjacentHTML(
-      "afterend",
-      `<div class="tooltip" style="left: ${position.left}px; top: ${position.top} + 10px"> ${element.title}  </div>`,
-    );
+    console.log(element.hasChildNodes());
+    if (element.childNodes.length <= 1) {
+      element.insertAdjacentHTML(
+        "beforeend",
+        `<div class="tooltip" style="left: ${position.left}px; top: ${position.top} + 10px"> ${element.title}  </div>`,
+      );
+    } else {
+      element.removeChild(element.firstElementChild);
+    }
   });
 });
